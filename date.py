@@ -3,13 +3,15 @@ Practical Use Classes
 """
 from pyutil.decorators import method_expects
 
+
 class Date:
     """Class with 3 int attributes: a year, a month, and a day."""
 
     @method_expects(int, int, int)
     def __init__(self, year, month, day):
         if month > 12 or month < 1:
-            raise ValueError("month must be in range 1-12")
+            raise ValueError("month must be in range 1-12.")
+        last_day = 31
         if month == 2:
             if year % 4 == 0:
                 last_day = 29
@@ -17,10 +19,8 @@ class Date:
                 last_day = 28
         elif month == (4 or 6 or 9 or 11):
             last_day = 30
-        else:
-            last_day = 31
         if day > last_day or day < 1:
-            raise ValueError("current value of day is impossible")
+            raise ValueError("current value of day is impossible.")
 
         self._year = year
         self._month = month
@@ -63,12 +63,25 @@ class Date:
     @month.setter
     def month(self, new_month):
         """Sets the month attribute of date."""
+        if new_month > 12 or new_month < 1:
+            raise ValueError("month must be in range 1-12.")
         self._month = new_month
 
     @method_expects(int)
     @day.setter
     def day(self, new_day):
         """Sets the day attribute of date."""
+        last_day = 31
+        if self._month == 2:
+            if self._year % 4 == 0:
+                last_day = 29
+            else:
+                last_day = 28
+        elif self._month == (4 or 6 or 9 or 11):
+            last_day = 30
+
+        if new_day > last_day or new_day < 1:
+            raise ValueError("current value of day is impossible.")
         self._day = new_day
 
     @method_expects(int, int)
