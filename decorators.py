@@ -1,6 +1,6 @@
 """
 Practical Use Decorators
-@author Jacob York
+author: Jacob York
 """
 from datetime import datetime
 
@@ -34,11 +34,11 @@ def method_expects(*param_types):
         Does not support functions."""
         def inner(self, *args):
             for i in range(len(param_types)):
-                arg = args[i]
-                param_type = param_types[i]
-                if not isinstance(arg, param_type):
+                if not isinstance(args[i], param_types[i]):
                     raise TypeError(
-                        "\"" + str(arg) + "\" of type " + str(type(arg)) + " must be of type " + str(param_type) + "."
+                        "\"" + str(args[i]) +
+                        "\" of type " + str(type(args[i])) +
+                        " must be of type " + str(param_types[i]) + "."
                     )
             function(self, *args)
         return inner
@@ -50,11 +50,11 @@ def expects(*param_types):
         """Used with functions."""
         def inner(*args):
             for i in range(len(param_types)):
-                arg = args[i]
-                param_type = param_types[i]
-                if not isinstance(arg, param_type):
+                if not isinstance(args[i], param_types[i]):
                     raise TypeError(
-                        "\"" + str(arg) + "\" of type " + str(type(arg)) + " must be of type " + str(param_type) + "."
+                        "\"" + str(args[i]) +
+                        "\" of type " + str(type(args[i])) +
+                        " must be of type " + str(param_types[i]) + "."
                     )
             function(*args)
         return inner
