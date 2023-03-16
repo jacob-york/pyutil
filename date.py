@@ -29,10 +29,10 @@ class Date:
     def __str__(self):
         """a Date's default appearance in console is day/month/year.
         However, use .display() method to return a string in whatever order you'd like."""
-        return str(self._day) + "/" + str(self._month) + "/" + str(self._year)
+        return f"{self._day}/{self._month}/{self._year}"
 
     def __repr__(self):
-        return f"(year={str(self._year)} month={str(self._month)} day={str(self._day)})"
+        return f"Date(year={str(self._year)} month={str(self._month)} day={str(self._day)})"
 
     def __eq__(self, other):
         if isinstance(other, Date):
@@ -130,9 +130,9 @@ class Date:
         (ex: Date(2001, 3, 9).display("mdy") -> "3/9/2001")
         """
         if len(order) != 3:
-            raise RuntimeError('"' + order + '" must be 3 characters long exactly')
+            raise RuntimeError(f'"{order}" must be 3 characters long exactly')
         abbr = {"y": str(self._year), "m": str(self._month), "d": str(self._day)}
-        return abbr[order[0]] + "/" + abbr[order[1]] + "/" + abbr[order[2]]\
+        return f"{abbr[order[0]]}/{abbr[order[1]]}/{abbr[order[2]]}"
 
 '''
     def age_get(self) -> int:

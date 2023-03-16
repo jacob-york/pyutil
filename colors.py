@@ -54,10 +54,10 @@ if the color name is not found in color_dict, no color is applied"""
             if type(color) == int:
                 color_codes.append(str(color))
             else:
-                raise TypeError('"' + str(type(color)) + '" is not a vaild type for color')
+                raise TypeError(f'"{type(color)}" is not a vaild type for color.')
         except KeyError:
             if color.isdigit():
                 color_codes.append(color)
             else:
-                raise KeyError("invalid color name: " + color)
+                raise KeyError(f"invalid color name: {color}.")
     return f"\033[{';'.join(color_codes)}m" + str(text) + "\033[0m"
