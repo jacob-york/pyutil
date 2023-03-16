@@ -27,26 +27,26 @@ def ignore_if_error(function):
     return inner
 
 
-def method_expects(*param_types):
+def method_expects(*types):
     """Used with METHOD definitions to restrict the parameter to param_type.
     Does not support functions."""
     def decorator(function):
         def inner(self, *args):
-            for i in range(len(param_types)):
-                if not isinstance(args[i], param_types[i]):
-                    raise TypeError(f'"{args[i]}" of type {type(args[i])} must be of type {param_types[i]}.')
+            for arg, type_ in zip(args, types):
+                if not isinstance(arg, type_):
+                    raise TypeError(f'"{arg}" of type {type(arg)} must be of type {type_}.')
             function(self, *args)
         return inner
     return decorator
 
 
-def expects(*param_types):
+def expects(*types):
     """Used with functions."""
     def decorator(function):
         def inner(*args):
-            for i in range(len(param_types)):
-                if not isinstance(args[i], param_types[i]):
-                    raise TypeError(f'"{args[i]}" of type {type(args[i])} must be of type {param_types[i]}.')
+            for arg, type_ in zip(args, types):
+                if not isinstance(arg, type_):
+                    raise TypeError(f'"{arg}" of type {type(arg)} must be of type {type_}.')
             function(*args)
         return inner
     return decorator
