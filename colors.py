@@ -1,7 +1,4 @@
-"""
-colors.py
-A module that makes coloring strings in the console easier.
-"""
+"""A module that makes coloring strings in the console easier."""
 
 from os import system
 
@@ -41,9 +38,9 @@ color_dict = {
 
 def paint(text, *colors):
     """paint(text, *colors)
-
-if text is not a String, the toString will be used
-if the color name is not found in color_dict, no color is applied"""
+    if text is not a String, the toString will be used
+    if the color name is not found in color_dict, no color is applied
+    """
     
     color_codes = []
     
@@ -61,3 +58,12 @@ if the color name is not found in color_dict, no color is applied"""
             else:
                 raise KeyError(f"invalid color name: {color}.")
     return f"\033[{';'.join(color_codes)}m" + str(text) + "\033[0m"
+
+
+def main():
+    """For use in Debugging..."""
+    pass
+
+
+if __name__ == "__main__":
+    main()

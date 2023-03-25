@@ -1,16 +1,13 @@
-"""
-(By Jacob York)
-A module built over Python's msvcrt to make working with keyboards easier.
+"""A module built over Python's msvcrt to make working with keyboards easier.
 """
 import msvcrt
 
 
-def kbinput(prompt, choices, clear_scrn=False):
-    
+def kbinput(prompt: str, choices, clear_scrn=False):
     """(aka input() but with key presses)
-suspends the program until a character from choices is entered. It then returns the Unicode code point for said character.
-kw args:
-    clear_scrn: determines whether console screen is cleared after user enters their choice (default is false to mimic input())"""
+    suspends the program until a character from choices is entered. It then returns the Unicode code point for said character.
+    kw args: clear_scrn: determines whether console screen is cleared after user enters their choice (default is false to mimic input())
+    """
     from os import system, name
     
     print(prompt, end="", flush=True)
@@ -142,3 +139,10 @@ k = {
 }
 
 
+def main():
+    """For use in Debugging..."""
+    pass
+
+
+if __name__ == "__main__":
+    main()

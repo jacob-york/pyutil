@@ -1,10 +1,12 @@
-from decorators import method_expects
+"""A module with 2d and 3d coordinate classes."""
+
+from pyutil.decorators import expects
 
 
 class Coord2d:
     """A single 2D Coordinate"""
 
-    @method_expects((int, float), (int, float))
+    @expects(int | float, int | float, method=True)
     def __init__(self, x, y):
         self._x = x
         self._y = y
@@ -28,12 +30,12 @@ class Coord2d:
         return self._y
 
     @x.setter
-    @method_expects((int, float))
+    @expects(int | float, method=True)
     def x(self, new_x):
         self._x = new_x
 
     @y.setter
-    @method_expects((int, float))
+    @expects(int | float, method=True)
     def y(self, new_y):
         self._y = new_y
 
@@ -41,7 +43,7 @@ class Coord2d:
 class Coord3d:
     """A single 3D Coordinate"""
 
-    @method_expects((int, float), (int, float), (int, float))
+    @expects(int | float, int | float, int | float, method=True)
     def __init__(self, x, y, z):
         self._x = x
         self._y = y
@@ -51,7 +53,7 @@ class Coord3d:
         return f"({self._x}, {self._y}, {self._z})"
 
     def __repr__(self):
-        return f"Coord2d(x={self._x}, y={self._y}, z={self._z})"
+        return f"Coord3d(x={self._x}, y={self._y}, z={self._z})"
 
     def __eq__(self, other):
         if isinstance(other, Coord3d):
@@ -70,16 +72,26 @@ class Coord3d:
         return self._z
 
     @x.setter
-    @method_expects((int, float))
+    @expects(int | float, method=True)
     def x(self, new_x):
         self._x = new_x
 
     @y.setter
-    @method_expects((int, float))
+    @expects(int | float, method=True)
     def y(self, new_y):
         self._y = new_y
 
     @z.setter
-    @method_expects((int, float))
+    @expects(int | float, method=True)
     def z(self, new_z):
         self._z = new_z
+
+
+def main():
+    point = Coord2d(5, 2.0)
+    point.y = .2
+    point.x = b"hello!"
+
+
+if __name__ == "__main__":
+    main()
