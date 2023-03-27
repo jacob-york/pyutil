@@ -1,2 +1,0 @@
-A personal-use package of utility functions, classes, decorators, etc.
-Created by Jacob York

@@ -1,6 +1,7 @@
 """If, for whatever reason, you don't feel like using datetime."""
+from typing import get_type_hints
 
-from pyutil.decorators import expects
+from pyutil.decorators import expects, enforce_type_hints
 from time import localtime
 from random import randint, seed
 
@@ -56,7 +57,7 @@ class Date:
         return self.__day
 
     @year.setter
-    @expects(int)
+    @expects(int, method=True)
     def year(self, new_year):
         """Sets the year attribute of date."""
         self.__year = new_year
@@ -71,7 +72,7 @@ class Date:
 
     @day.setter
     @expects(int, method=True)
-    def day(self, new_day):
+    def day(self, new_day: int):
         """Sets the day attribute of date."""
         last_day = 31
         if self.__month == 2:
@@ -121,7 +122,7 @@ class Date:
         return Date(localtime()[0], localtime()[1], localtime()[2] + 1)
 
     @expects(str, method=True)
-    def display(self, order="dmy") -> str:
+    def display(self, order: str = "dmy") -> str:
         """Returns str(self) in a customizable order using the order parameter.
         To use the order parameter, simply pass in a string with 3 chars: y, m, d.
         The order of these 3 chars will determine the return's order.
@@ -137,9 +138,18 @@ class Date:
         return f"{abbr[order[0]]}/{abbr[order[1]]}/{abbr[order[2]]}"
 
 
+@enforce_type_hints
+def my_func(param1: int, param2: str, param3: tuple, param4: dict):
+    pass
+
+
+def inner(*args, **kwargs):
+    pass
+
+
 def main():
     """For use in Debugging..."""
-    pass
+    my_func(1, "", (), {1: "one"})
 
 
 if __name__ == "__main__":
