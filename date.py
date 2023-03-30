@@ -1,7 +1,6 @@
 """If, for whatever reason, you don't feel like using datetime."""
-from typing import get_type_hints
 
-from pyutil.decorators import expects, enforce_type_hints
+from pyutil.decorators import enforce_param_hints
 from time import localtime
 from random import randint, seed
 
@@ -9,8 +8,8 @@ from random import randint, seed
 class Date:
     """Class with 3 int attributes: a year, a month, and a day."""
 
-    @expects(int, int, int, method=True)
-    def __init__(self, year, month, day):
+    @enforce_param_hints
+    def __init__(self, year: int, month: int, day: int):
         if month > 12 or month < 1:
             raise ValueError("month must be in range 1-12.")
         last_day = 31
@@ -57,21 +56,21 @@ class Date:
         return self.__day
 
     @year.setter
-    @expects(int, method=True)
-    def year(self, new_year):
+    @enforce_param_hints
+    def year(self, new_year: int):
         """Sets the year attribute of date."""
         self.__year = new_year
 
     @month.setter
-    @expects(int, method=True)
-    def month(self, new_month):
+    @enforce_param_hints
+    def month(self, new_month: int):
         """Sets the month attribute of date."""
         if new_month > 12 or new_month < 1:
             raise ValueError("month must be in range 1-12.")
         self.__month = new_month
 
     @day.setter
-    @expects(int, method=True)
+    @enforce_param_hints
     def day(self, new_day: int):
         """Sets the day attribute of date."""
         last_day = 31
@@ -88,8 +87,8 @@ class Date:
         self.__day = new_day
 
     @staticmethod
-    @expects(int, int, method=True)
-    def random(start=1900, end=localtime()[0]):
+    @enforce_param_hints
+    def random(start: int = 1900, end: int = localtime()[0]):
         """Generates a random instance of Date within range start to end (defaults to 1900-current)"""
         seed()
         year = randint(start, end)
@@ -121,7 +120,7 @@ class Date:
         """Uses Date and time.localtime() to return tomorrow's date as an instance of Date"""
         return Date(localtime()[0], localtime()[1], localtime()[2] + 1)
 
-    @expects(str, method=True)
+    @enforce_param_hints
     def display(self, order: str = "dmy") -> str:
         """Returns str(self) in a customizable order using the order parameter.
         To use the order parameter, simply pass in a string with 3 chars: y, m, d.
@@ -138,18 +137,9 @@ class Date:
         return f"{abbr[order[0]]}/{abbr[order[1]]}/{abbr[order[2]]}"
 
 
-@enforce_type_hints
-def my_func(param1: int, param2: str, param3: tuple, param4: dict):
-    pass
-
-
-def inner(*args, **kwargs):
-    pass
-
-
 def main():
     """For use in Debugging..."""
-    my_func(1, "", (), {1: "one"})
+    pass
 
 
 if __name__ == "__main__":
