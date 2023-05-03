@@ -1,6 +1,6 @@
 """Practical Use Decorators (and decorator factories)"""
+
 import inspect
-from types import UnionType
 from datetime import datetime
 from typing import Callable
 
@@ -55,8 +55,10 @@ def ignore_if_error(function):
     return inner
 
 
-def enforce_param_hints(function):
-    """Wil enforce type hints on parameters."""
+def enforce_type_hints(function):
+    """Raises a TypeError if the decorated function's type hints (on parameters)
+    don't agree with the arguments passed.
+    """
     def inner(*args, **kwargs):
         annotations = function.__annotations__
         arguments = inspect.signature(function).bind(*args, **kwargs).arguments

@@ -1,6 +1,6 @@
 """If, for whatever reason, you don't feel like using datetime."""
 
-from pyutil.decorators import enforce_param_hints
+from pyutil.decorators import enforce_type_hints
 from time import localtime
 from random import randint, seed
 
@@ -8,7 +8,7 @@ from random import randint, seed
 class Date:
     """Class with 3 int attributes: a year, a month, and a day."""
 
-    @enforce_param_hints
+    @enforce_type_hints
     def __init__(self, year: int, month: int, day: int):
         if month > 12 or month < 1:
             raise ValueError("month must be in range 1-12.")
@@ -56,13 +56,13 @@ class Date:
         return self.__day
 
     @year.setter
-    @enforce_param_hints
+    @enforce_type_hints
     def year(self, new_year: int):
         """Sets the year attribute of date."""
         self.__year = new_year
 
     @month.setter
-    @enforce_param_hints
+    @enforce_type_hints
     def month(self, new_month: int):
         """Sets the month attribute of date."""
         if new_month > 12 or new_month < 1:
@@ -70,7 +70,7 @@ class Date:
         self.__month = new_month
 
     @day.setter
-    @enforce_param_hints
+    @enforce_type_hints
     def day(self, new_day: int):
         """Sets the day attribute of date."""
         last_day = 31
@@ -87,7 +87,7 @@ class Date:
         self.__day = new_day
 
     @staticmethod
-    @enforce_param_hints
+    @enforce_type_hints
     def random(start: int = 1900, end: int = localtime()[0]):
         """Generates a random instance of Date within range start to end (defaults to 1900-current)"""
         seed()
@@ -120,7 +120,7 @@ class Date:
         """Uses Date and time.localtime() to return tomorrow's date as an instance of Date"""
         return Date(localtime()[0], localtime()[1], localtime()[2] + 1)
 
-    @enforce_param_hints
+    @enforce_type_hints
     def display(self, order: str = "dmy") -> str:
         """Returns str(self) in a customizable order using the order parameter.
         To use the order parameter, simply pass in a string with 3 chars: y, m, d.

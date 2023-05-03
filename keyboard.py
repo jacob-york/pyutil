@@ -3,10 +3,12 @@
 import msvcrt
 
 
-def kbinput(prompt: str, choices, clear_scrn=False):
+def kbinput(prompt: str, choices, clear_screen=False):
     """(aka input() but with key presses)
-    suspends the program until a character from choices is entered. It then returns the Unicode code point for said character.
-    kw args: clear_scrn: determines whether console screen is cleared after user enters their choice (default is false to mimic input())
+    suspends the program until a character from choices is entered.
+    It then returns the Unicode code point for said character.
+    clear_screen: determines whether the console screen is cleared
+    after the user enters their choice (default is false to mimic input()).
     """
     from os import system, name
     
@@ -17,7 +19,7 @@ def kbinput(prompt: str, choices, clear_scrn=False):
             user_input = ord(msvcrt.getch())
             if user_input in choices:
                 choice_entered = True
-                if clear_scrn:
+                if clear_screen:
                     system("cls" if name == "nt" else "clear")
     return user_input
 
