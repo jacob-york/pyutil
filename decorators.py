@@ -40,7 +40,7 @@ def log_error(str_function: str | Callable):
         return inner
 
     # log_error toggles between being a decorator factory or a normal decorator
-    # based on its parameters.
+    # based on its parameter type.
     return decorator(str_function) if passed_function else decorator
 
 
