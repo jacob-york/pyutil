@@ -77,3 +77,15 @@ class Graph:
 
         self.adjacency_list[vertex1].append(vertex2)
         self.adjacency_list[vertex2].append(vertex1)
+
+
+class DirGraph:
+    pass
+
+
+class WeightedGraph:
+    pass
+
+
+class WeightedDirGraph:
+    pass
